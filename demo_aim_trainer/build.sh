@@ -18,13 +18,9 @@ echo "Building for: $TARGET"
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
-if [ "$TARGET" == "linux" ]; then
-    cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
-else
-    cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-          -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake ..
-fi
+cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
 
-make -j$(nproc)
+cmake --build . --parallel
+
 
 echo "Build finished!"
